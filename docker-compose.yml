@@ -1,6 +1,15 @@
 version: '3.3'
 services:
     restreamer:
-        network_mode: host
-        restart: always
-        image: datarhei/restreamer
+        container_name: core
+        privileged: true
+        volumes:
+            - '/opt/core/config:/core/config'
+            - '/opt/core/data:/core/data'
+        ports:
+            - '8080:8080'
+            - '8181:8181'
+            - '1935:1935'
+            - '1936:1936'
+            - '6000:6000/udp'
+        image: 'datarhei/restreamer:cuda-latest'
